@@ -1,6 +1,5 @@
 const app = {};
 
-
 // UNSPLASH
 const photoApp = {};
 photoApp.clientID = '312de5ede65d57c255d22fc5a82552c05c3dc0fde821f66cfe2bef2ad716f8af';
