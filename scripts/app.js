@@ -1,12 +1,11 @@
 const app = {};
 
 // UNSPLASH
-const photoApp = {};
-photoApp.clientID = '312de5ede65d57c255d22fc5a82552c05c3dc0fde821f66cfe2bef2ad716f8af';
-photoApp.url = 'https://api.unsplash.com/photos/random/?client_id='+photoApp.clientID;
-photoApp.getPhotos = () => {
+app.unsplashClientID = '312de5ede65d57c255d22fc5a82552c05c3dc0fde821f66cfe2bef2ad716f8af';
+app.unsplashUrl = 'https://api.unsplash.com/photos/random/?client_id=' + app.unsplashClientID;
+app.getPhotos = () => {
   $.ajax({
-    url: photoApp.url,
+    url: app.unsplashUrl,
     method: 'GET',
     dataType: 'JSON',
     // data: {
@@ -14,28 +13,23 @@ photoApp.getPhotos = () => {
     // }
   }).then((res) => {
     console.log(res);
-    photoApp.displayResults(res);
+    app.displayPhotoResults(res);
   });
 }
 
-photoApp.displayResults = (res) => {
+app.displayPhotoResults = (res) => {
   $('#photo').append(`
     <img src=${res.urls.full}>
   `);
 }
 
-photoApp.init = () => {
-  photoApp.getPhotos();
-}
-
 // WEATHER API
-const weatherApp = {};
 
-weatherApp.apiKey = 'aabc3958afb1ab39dcbe55a9d3801b80';
+app.weatherApiKey = 'aabc3958afb1ab39dcbe55a9d3801b80';
 
-weatherApp.getWeather = (lat = 43.6532, lng = -79.3832) => {
+app.getWeather = (lat = 43.6532, lng = -79.3832) => {
   $.ajax({
-    url: `https://api.darksky.net/forecast/${weatherApp.apiKey}/${lat},${lng}`,
+    url: `https://api.darksky.net/forecast/${app.weatherApiKey}/${lat},${lng}`,
     dataType: 'JSONP',
     method: 'GET',
     data: {
@@ -43,11 +37,11 @@ weatherApp.getWeather = (lat = 43.6532, lng = -79.3832) => {
     }
   }).then((res) => {
     console.log(res);
-    weatherApp.displayResults(res);
+    app.displayWeatherResults(res);
   })
 }
 
-weatherApp.displayResults = (res) => {
+app.displayWeatherResults = (res) => {
   const degrees = ` &#176;C`
   const currentTemp = Math.floor(res.currently.temperature);
   const dailyHighTemp = Math.floor(res.daily.data[0].temperatureHigh);
@@ -64,49 +58,43 @@ weatherApp.displayResults = (res) => {
   `);
 }
 
-weatherApp.getCoordinates = () => {
+app.getCoordinates = () => {
   navigator.geolocation.getCurrentPosition(function(position) {
     const lat = position.coords.latitude;
     const lng = position.coords.longitude;
-    weatherApp.getWeather(lat, lng);
+    app.getWeather(lat, lng);
   });
 }
 
-weatherApp.init = () => {
-  weatherApp.getCoordinates();
-}
+// NEWS APIc
+app.newsApiKey = 'b66771502bb047dbb8d6dd42c9d0b1b1';
 
-// NEWS API - TWO PROMISES
-const newsApp = {};
-
-newsApp.apiKey = 'b66771502bb047dbb8d6dd42c9d0b1b1';
-
-newsApp.getNews = $.ajax({
+app.getNews = $.ajax({
   url: `https://newsapi.org/v2/top-headlines`,
   dataType: 'JSON',
   method: 'GET',
   data: {
-    apiKey: newsApp.apiKey,
+    apiKey: app.newsApiKey,
     country: 'ca',
     pageSize: 5
   }
 });
 
-newsApp.getHackerNews = $.ajax({
+app.getHackerNews = $.ajax({
   url: `https://newsapi.org/v2/top-headlines`,
   dataType: 'JSON',
   method: 'GET',
   data: {
-    apiKey: newsApp.apiKey,
+    apiKey: app.newsApiKey,
     sources: 'hacker-news',
     pageSize: 5
   }
 });
 
-$.when(newsApp.getNews, newsApp.getHackerNews)
+$.when(app.getNews, app.getHackerNews)
   .then((res1, res2) => {
-    newsApp.displayResults(res1);
-    newsApp.displayResults(res2);
+    // app.displayNewsResults(res1); // NEWS CURRENTLY DISABLED.
+    // app.displayNewsResults(res2); // NEWS CURRENTLY DISABLED.
   })
   .fail((err1, err2) => {
     console.log(err1, err2);
@@ -114,7 +102,7 @@ $.when(newsApp.getNews, newsApp.getHackerNews)
 
 
 
-newsApp.displayResults = (res) => {
+app.displayNewsResults = (res) => {
   const articles = res[0].articles
   articles.forEach((article) => {
     $(`#news`).append(`
@@ -126,14 +114,9 @@ newsApp.displayResults = (res) => {
   })
 }
 
-newsApp.init = () => {
-
-}
-
 app.init = () => {
-  photoApp.init();
-  weatherApp.init();
-  newsApp.init();
+  app.getPhotos();
+  app.getCoordinates();
 }
 
 $(() => {
