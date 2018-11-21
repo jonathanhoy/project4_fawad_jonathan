@@ -8,13 +8,38 @@
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-  <h1>Hello, World!</h1>
+  <main>
+    <div class="wrapper">
+      <div class="grid-container">
+        <div class="grid-item date-time">
+          <p>Date time</p>
+        </div>
+        <div class="grid-item weather">
+          <p>Weather</p>
+        </div>
+        <div class="grid-item hacker-news">
+          <p>Hacker News</p>
+        </div>
+        <div class="grid-item unsplash">
+          <p>Unsplash</p>
+        </div>
+        <div class="grid-item news">
+          <p>News with Catg</p>
+        </div>
+      </div>
+    </div>
+  </main>
 
-  <div id="weather">
-    <h2>Weather</h2>
+  <div style="display: none;">
+    <h1>Hello, World!</h1>
+  
+    <div id="weather">
+      <h2>Weather</h2>
+    </div>
+    <div id="news"></div>
+    <div id="photo"></div>
+
   </div>
-  <div id="news"></div>
-  <div id="photo"></div>
 
   <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
   <script src="scripts/app.js"></script>
