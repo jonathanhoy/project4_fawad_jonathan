@@ -77,54 +77,6 @@ weatherApp.init = () => {
   weatherApp.getCoordinates();
 }
 
-
-
-// // NEWS API - SINGLE PROMISE
-// const newsApp = {};
-
-// newsApp.apiKey = 'b66771502bb047dbb8d6dd42c9d0b1b1';
-
-// newsApp.getNews = () => {
-//   $.ajax({
-//     url: `https://newsapi.org/v2/top-headlines`,
-//     dataType: 'JSON',
-//     method: 'GET',
-//     data: {
-//       // country: 'ca',
-//       apiKey: newsApp.apiKey,
-//       // pageSize: 5
-//       sources: 'hacker-news'
-//     }
-//   }).then((res) => {
-//     console.log(res);
-//     newsApp.displayResults(res.articles);
-//   })
-// }
-
-// newsApp.displayResults = (res) => {
-//   $('#news').append(`
-//     <h2>News</h2>
-//   `);
-//   res.forEach((article) => {
-//     $('#news').append(`
-//       <div class="article">
-//         <h3>${article.title}</h3>
-//         <a href="${article.url}" target="_blank">${article.source.name}</a>
-//       </div>
-//     `);
-//   })
-// }
-
-// newsApp.init = () => {
-//   newsApp.getNews();
-// }
-
-
-
-
-
-
-
 // NEWS API - TWO PROMISES
 const newsApp = {};
 
@@ -147,15 +99,15 @@ newsApp.getHackerNews = $.ajax({
   method: 'GET',
   data: {
     apiKey: newsApp.apiKey,
-    sources: 'hacker-news'
+    sources: 'hacker-news',
+    pageSize: 5
   }
 });
 
 $.when(newsApp.getNews, newsApp.getHackerNews)
   .then((res1, res2) => {
-    console.log(res1, res2);
-    // newsApp.displayResults(res1);
-    // newsApp.displayResults(res2);
+    newsApp.displayResults(res1);
+    newsApp.displayResults(res2);
   })
   .fail((err1, err2) => {
     console.log(err1, err2);
@@ -163,23 +115,20 @@ $.when(newsApp.getNews, newsApp.getHackerNews)
 
 
 
-// newsApp.displayResults = (res) => {
-//   $('#news').append(`
-//     <h2>News</h2>
-//   `);
-//   res.forEach((article) => {
-//     $('#news').append(`
-//       <div class="article">
-//         <h3>${article.title}</h3>
-//         <a href="${article.url}" target="_blank">${article.source.name}</a>
-//       </div>
-//     `);
-//   })
-// }
+newsApp.displayResults = (res) => {
+  const articles = res[0].articles
+  articles.forEach((article) => {
+    $(`#news`).append(`
+      <div class="article">
+        <h3>${article.title}</h3>
+        <a href="${article.url}" target="_blank">${article.source.name}</a>
+      </div>
+    `);
+  })
+}
 
 newsApp.init = () => {
-  // newsApp.getNews();
-  // newsApp.getHackerNews();
+
 }
 
 app.init = () => {
