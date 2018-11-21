@@ -47,13 +47,14 @@ app.displayWeatherResults = (res) => {
   const dailyHighTemp = Math.floor(res.daily.data[0].temperatureHigh);
   const dailyLowTemp = Math.floor(res.daily.data[0].temperatureLow);
   const dailySummary = res.daily.data[0].summary;
-  $('#weather').append(`
-    <h2>Weather</h2>
-    <div class="weather">
-      <p>Current Weather: ${currentTemp}${degrees}</p>
-      <p>Today's High:  ${dailyHighTemp}${degrees}</p>
-      <p>Today's Low:  ${dailyLowTemp}${degrees}</p>
-      <p>${dailySummary}</p>
+  $('.weather').append(`
+    <div class="weather-metrics">
+      <div class="weather-temps">
+        <p class="weather-current">${currentTemp}${degrees}</p>
+        <p class="weather-high">High:  ${dailyHighTemp}${degrees}</p>
+        <p class="weather-low">Low:  ${dailyLowTemp}${degrees}</p>
+      </div>
+      <p class="weather-summary">${dailySummary}</p>
     </div>
   `);
 }
