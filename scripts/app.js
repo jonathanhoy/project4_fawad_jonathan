@@ -2,25 +2,29 @@ const app = {};
 
 // UNSPLASH
 app.unsplashClientID = '312de5ede65d57c255d22fc5a82552c05c3dc0fde821f66cfe2bef2ad716f8af';
-app.unsplashUrl = 'https://api.unsplash.com/photos/random/?client_id=' + app.unsplashClientID;
-app.getPhotos = () => {
+app.unsplashUrl = `https://api.unsplash.com/photos/random/?client_id=${app.unsplashClientID}`;
+app.getPhotos = (q) => {
   $.ajax({
     url: app.unsplashUrl,
     method: 'GET',
     dataType: 'JSON',
-    // data: {
-    //   query: q
-    // }
+    data: {
+      query: q,
+      count: 14
+    }
   }).then((res) => {
-    console.log(res);
     app.displayPhotoResults(res);
   });
 }
 
 app.displayPhotoResults = (res) => {
-  $('#photo').append(`
-    <img src=${res.urls.full}>
-  `);
+  $('.unsplash-images').empty();
+  let results='';
+  for(let i = 0; i < res.length; i++){
+    results += `<img class="unsplash-image" src="${res[i].urls.full}" alt="${res[i].description}">`;
+  }
+  // console.log('results' + results);
+  $('.unsplash-images').append(results);
 }
 
 // WEATHER API
@@ -116,7 +120,12 @@ app.displayNewsResults = (res) => {
 }
 
 app.init = () => {
-  app.getPhotos();
+  // app.getPhotos();
+  $('.unsplash-search').on('change',function (e) {
+    e.preventDefault();
+    console.log($('.unsplash-search').val());
+    app.getPhotos($('.unsplash-search').val());
+  });
   app.getCoordinates();
 }
 

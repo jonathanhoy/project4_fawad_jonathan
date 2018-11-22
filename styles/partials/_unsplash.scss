@@ -1,0 +1,25 @@
+.unsplash-form{
+   display: flex;
+    justify-content: center;
+}
+
+.unsplash-search{
+   background: #fdfdfd;
+	padding: 0.5rem;
+	border-radius: 5px;
+	border: 1px solid #f1f1f1;
+   width: 200%;
+}
+
+.unsplash-images{
+   display: flex;
+   // overflow-x: auto;
+    width: 200%;
+    flex-wrap: wrap;
+   .unsplash-image {
+      max-width: 25%;
+      width: 205px;
+      height: 205px;
+      object-fit: cover;
+   }
+}

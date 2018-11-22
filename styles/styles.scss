@@ -2,6 +2,7 @@
 @import 'partials/setup';
 @import 'partials/media-queries';
 @import 'partials/weather';
+@import 'partials/unsplash';
 
 
 .wrapper{
@@ -34,11 +35,14 @@
 }
 
 .news {
-  grid-column: 3 / 5;
-  grid-row: 2/4;
+   grid-column: 3 / 5;
+   grid-row: 2/4;
 }
 
 .unsplash {
-  grid-row: 3 / 4;
-  grid-column: span 2;
+   grid-row: 3 / 4;
+   grid-column: span 2;
+   overflow-x: auto;
+   min-height: 430px;
+   overflow-y: hidden;
 }
