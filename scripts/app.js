@@ -22,11 +22,11 @@ app.displayPhotoResults = (res) => {
   // console.log(res);
   let results='';
   for(let i = 0; i < res.length; i++){
-    results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}">`;
+    results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" data-url="${res[i].urls.full}">`;
   }
   $('.unsplash-images').append(results);
   $('.unsplash-image').on('click', function(){
-    console.log($(this).attr('alt'));
+    console.log($(this).attr('data-url'));
   });
 }
 
@@ -123,7 +123,7 @@ app.displayNewsResults = (res) => {
 }
 
 app.init = () => {
-  // app.getPhotos();
+  //app.getPhotos();
   $('.unsplash-search').on('change',function (e) {
     e.preventDefault();
     console.log($('.unsplash-search').val());
@@ -134,4 +134,5 @@ app.init = () => {
 
 $(() => {
   app.init();
+  
 })
