@@ -1,0 +1,22 @@
+.date-time {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.time {
+  margin: 0;
+  font-size: 5rem;
+}
+
+.date {
+  margin-bottom: 0;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.date-container {
+  text-align: center;
+}
