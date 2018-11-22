@@ -48,14 +48,12 @@ app.displayWeatherResults = (res) => {
   const dailyLowTemp = Math.floor(res.daily.data[0].temperatureLow);
   const dailySummary = res.daily.data[0].summary;
   $('.weather').append(`
-    <div class="weather-metrics">
-      <div class="weather-temps">
-        <p class="weather-current">${currentTemp}${degrees}</p>
-        <p class="weather-high">High: ${dailyHighTemp}${degrees}</p>
-        <p class="weather-low">Low: ${dailyLowTemp}${degrees}</p>
-      </div>
-      <p class="weather-summary">${dailySummary}</p>
+    <div class="weather-temps animated fadeIn">
+      <p class="weather-current animated fadeIn">${currentTemp}${degrees}</p>
+      <p class="weather-high animated fadeIn">High: ${dailyHighTemp}${degrees}</p>
+      <p class="weather-low animated fadeIn">Low: ${dailyLowTemp}${degrees}</p>
     </div>
+    <p class="weather-summary animated fadeIn">${dailySummary}</p>
   `);
 }
 
@@ -73,6 +71,11 @@ app.currentTime = () => {
   window.setInterval(function() {
     const today = new Date();
     let hours = `${today.getHours()}`;
+    let hoursInDay = `${today.getHours()}`;
+    let timeOfDay = 'am'
+    if (hoursInDay >= 12 && hoursInDay !== 24) {
+      timeOfDay = 'pm'
+    }
     if (hours >= 13) {
       hours = hours - 12;
     }
@@ -80,8 +83,14 @@ app.currentTime = () => {
     minutes = app.checkTime(minutes);
     let currentTime = `${hours}:${minutes}`;
     $('.time-container').empty();
-    $('.time-container').append(`<p class="time">${currentTime}</p>`);
+    $('.time-container').append(`<p class="time">${currentTime} ${timeOfDay}</p>`);
   }, 1000);
+}
+
+// credit: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
+app.checkTime = (i) => {
+  if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+  return i;
 }
 
 app.currentDate = () => {
@@ -93,14 +102,9 @@ app.currentDate = () => {
   let day = `${today.getDate()}`;
   let currentDate = `${month} ${day}, ${year}`;
   $('.date-container').empty();
-  $('.date-container').append(`<p class="date">${currentDate}</p>`);
+  $('.date-container').append(`<p class="date animated fadeIn">${currentDate}</p>`);
 }
 
-// credit: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
-app.checkTime = (i) => {
-  if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
-  return i;
-}
 
 
 // NEWS API
@@ -154,8 +158,8 @@ app.displayNewsResults = (res) => {
 app.init = () => {
   app.getPhotos();
   app.getCoordinates();
-  app.currentTime();
   app.currentDate();
+  app.currentTime();
 }
 
 $(() => {

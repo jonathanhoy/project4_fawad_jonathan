@@ -161,9 +161,12 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; }
@@ -171,7 +174,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .weather-temps {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-row-gap: 0.5rem;
+  grid-template-rows: 1fr 1fr;
   grid-column-gap: 1rem; }
 
 .weather-current, .weather-high, .weather-low {
@@ -186,7 +189,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .weather-high, .weather-low {
   font-size: 2rem;
   grid-column: 2 / 3;
-  text-align: left; }
+  justify-self: end; }
 
 .weather-high {
   grid-row: 1 / 2;
@@ -201,8 +204,33 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   font-size: 1.6rem;
   margin-bottom: 0; }
 
+.date-time {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.time {
+  margin: 0;
+  font-size: 5rem; }
+
 .date {
-  color: red; }
+  margin-bottom: 0;
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 3.8rem; }
+
+.date-container {
+  text-align: center; }
 
 .wrapper {
   max-width: 1600px; }
