@@ -156,23 +156,92 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   .unsplash {
     grid-row: auto; } }
 
+.weather {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
 .weather-temps {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template: 1fr 1fr; }
+  grid-template-columns: 1.75fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr; }
+
+.weather-current, .weather-high, .weather-low {
+  margin: 0;
+  justify-self: center; }
 
 .weather-current {
-  font-size: 4.5rem;
+  font-size: 5rem;
   grid-column: 1 / 2;
-  grid-row: 1 / 3; }
+  grid-row: 1 / 3;
+  -ms-flex-item-align: center;
+  align-self: center; }
+
+.weather-high, .weather-low {
+  font-size: 2rem;
+  grid-column: 2 / 3;
+  justify-self: end; }
+
+.weather-high-temp, .weather-low-temp {
+  grid-column: 3 / 4;
+  margin: 0;
+  text-align: right; }
+
+.weather-high-temp {
+  -ms-flex-item-align: end;
+  align-self: end; }
 
 .weather-high {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2; }
+  grid-row: 1 / 2;
+  -ms-flex-item-align: end;
+  align-self: end; }
 
 .weather-low {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3; }
+  grid-row: 2 / 3;
+  -ms-flex-item-align: start;
+  align-self: start; }
+
+.weather-summary {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 0; }
+
+.date-time {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.time {
+  margin: 0;
+  font-size: 5rem; }
+
+.date {
+  margin-bottom: 0;
+  font-size: 1.6rem;
+  text-align: center; }
+
+.date-container {
+  text-align: center; }
 
 .unsplash-form {
   display: -webkit-box;
