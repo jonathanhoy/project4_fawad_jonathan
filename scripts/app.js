@@ -19,7 +19,7 @@ app.getPhotos = (q) => {
 
 app.displayPhotoResults = (res) => {
   $('.unsplash-images').empty();
-  // console.log(res);
+  console.log(res);
   let results='';
   for(let i = 0; i < res.length; i++){
     results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" data-url="${res[i].urls.full}">`;
@@ -165,8 +165,41 @@ app.displayNewsResults = (res) => {
   })
 }
 
+
+
+// NEW YORK TIMES
+
+app.nytUrl = "https://api.nytimes.com/svc/topstories/v2/world.json";
+app.nytUrl += '?' + $.param({
+  'api-key': "b6adbb67b7d9458997ba0b2b5bed2846"
+});
+app.getNyt = () => {
+  $.ajax({
+    url: app.nytUrl,
+    method: 'GET',
+  }).then((res) => {
+    console.log(res.results)
+    app.displayNytArticles(res);
+  });
+}
+
+app.displayNytArticles = (res) => {
+  for (let i = 0; i < 3; i++) {
+    $('.news').append(`
+      <div class="news-container">
+        <img src="${res.results[i].multimedia[0].url}">
+        <h2 class="news-title"><a href="${res.results[i].url}" target="_blank">${res.results[i].title}</a></h2>
+      </div>
+    `);
+  }
+}
+
+
+
+
+
 app.init = () => {
-  //app.getPhotos();
+  // app.getPhotos();
   $('.unsplash-search').on('change',function (e) {
     e.preventDefault();
     console.log($('.unsplash-search').val());
@@ -175,6 +208,7 @@ app.init = () => {
   app.getCoordinates();
   app.currentDate();
   app.currentTime();
+  app.getNyt();
 }
 
 $(() => {
