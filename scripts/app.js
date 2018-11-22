@@ -25,11 +25,21 @@ app.displayPhotoResults = (res) => {
     results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" data-url="${res[i].urls.full}">`;
   }
   $('.unsplash-images').append(results);
-  $('.unsplash-image').on('click', function(){
-    let bgURL = $(this).attr('data-url'); 
-    $('.image-modal').css('background', `url(${bgURL}) center`);
-    $('.image-modal').css('background-size', `cover`)
+  app.unsplashModal();
+}
+
+app.unsplashModal = () =>{
+  $('.unsplash-image').on('click', function () {
+    let bgURL = $(this).attr('data-url');
+    $('.image-modal').css('display', `block`);
+    $('.image-modal').css('background', `url(${bgURL}) center center`);
+    $('.image-modal').css('background-size', `cover`);
   });
+
+  $('.fa-times').on('click', function () {
+    $('.image-modal').css('display', `none`);
+  });
+
 }
 
 // WEATHER API
