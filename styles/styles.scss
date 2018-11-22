@@ -42,7 +42,11 @@
 .unsplash {
    grid-row: 3 / 4;
    grid-column: span 2;
-   overflow-x: auto;
    min-height: 430px;
+   overflow-x: auto;
    overflow-y: hidden;
+   -webkit-overflow-scrolling: touch;
+   &::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -183,25 +183,29 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   justify-content: center; }
 
 .unsplash-search {
-  background: #fdfdfd;
+  background: #f7f5f5;
   padding: 0.5rem;
   border-radius: 5px;
   border: 1px solid #f1f1f1;
-  width: 200%; }
+  width: 1600px; }
 
 .unsplash-images {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 200%;
+  width: 1600px;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
   .unsplash-images .unsplash-image {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     max-width: 25%;
     width: 205px;
     height: 205px;
     -o-object-fit: cover;
-    object-fit: cover; }
+    object-fit: cover;
+    cursor: pointer; }
 
 .wrapper {
   max-width: 1600px; }
@@ -232,6 +236,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .unsplash {
   grid-row: 3 / 4;
   grid-column: span 2;
-  overflow-x: auto;
   min-height: 430px;
-  overflow-y: hidden; }
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; }
+  .unsplash::-webkit-scrollbar {
+    display: none; }

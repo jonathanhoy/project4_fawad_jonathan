@@ -19,12 +19,15 @@ app.getPhotos = (q) => {
 
 app.displayPhotoResults = (res) => {
   $('.unsplash-images').empty();
+  // console.log(res);
   let results='';
   for(let i = 0; i < res.length; i++){
-    results += `<img class="unsplash-image" src="${res[i].urls.full}" alt="${res[i].description}">`;
+    results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}">`;
   }
-  // console.log('results' + results);
   $('.unsplash-images').append(results);
+  $('.unsplash-image').on('click', function(){
+    console.log($(this).attr('alt'));
+  });
 }
 
 // WEATHER API
