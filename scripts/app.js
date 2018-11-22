@@ -51,8 +51,8 @@ app.displayWeatherResults = (res) => {
     <div class="weather-metrics">
       <div class="weather-temps">
         <p class="weather-current">${currentTemp}${degrees}</p>
-        <p class="weather-high">High:  ${dailyHighTemp}${degrees}</p>
-        <p class="weather-low">Low:  ${dailyLowTemp}${degrees}</p>
+        <p class="weather-high">High: ${dailyHighTemp}${degrees}</p>
+        <p class="weather-low">Low: ${dailyLowTemp}${degrees}</p>
       </div>
       <p class="weather-summary">${dailySummary}</p>
     </div>
@@ -67,7 +67,43 @@ app.getCoordinates = () => {
   });
 }
 
-// NEWS APIc
+// DATE AND TIME
+// credit: https://tecadmin.net/get-current-date-time-javascript/
+app.currentTime = () => {
+  window.setInterval(function() {
+    const today = new Date();
+    let hours = `${today.getHours()}`;
+    if (hours >= 13) {
+      hours = hours - 12;
+    }
+    let minutes = `${today.getMinutes()}`;
+    minutes = app.checkTime(minutes);
+    let currentTime = `${hours}:${minutes}`;
+    $('.time-container').empty();
+    $('.time-container').append(`<p class="time">${currentTime}</p>`);
+  }, 1000);
+}
+
+app.currentDate = () => {
+  const today = new Date();
+  let year = `${today.getFullYear()}`;
+  let currentMonth = `${today.getMonth()}`;
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let month = monthNames[currentMonth];
+  let day = `${today.getDate()}`;
+  let currentDate = `${month} ${day}, ${year}`;
+  $('.date-container').empty();
+  $('.date-container').append(`<p class="date">${currentDate}</p>`);
+}
+
+// credit: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
+app.checkTime = (i) => {
+  if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+  return i;
+}
+
+
+// NEWS API
 app.newsApiKey = 'b66771502bb047dbb8d6dd42c9d0b1b1';
 
 app.getNews = $.ajax({
@@ -118,6 +154,8 @@ app.displayNewsResults = (res) => {
 app.init = () => {
   app.getPhotos();
   app.getCoordinates();
+  app.currentTime();
+  app.currentDate();
 }
 
 $(() => {
