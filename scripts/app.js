@@ -42,7 +42,7 @@ app.getWeather = (lat = 43.6532, lng = -79.3832) => {
 }
 
 app.displayWeatherResults = (res) => {
-  const degrees = ` &#176;C`
+  const degrees = `&#176;C`
   const currentTemp = Math.floor(res.currently.temperature);
   const dailyHighTemp = Math.floor(res.daily.data[0].temperatureHigh);
   const dailyLowTemp = Math.floor(res.daily.data[0].temperatureLow);
@@ -50,8 +50,10 @@ app.displayWeatherResults = (res) => {
   $('.weather').append(`
     <div class="weather-temps animated fadeIn">
       <p class="weather-current animated fadeIn">${currentTemp}${degrees}</p>
-      <p class="weather-high animated fadeIn">High: ${dailyHighTemp}${degrees}</p>
-      <p class="weather-low animated fadeIn">Low: ${dailyLowTemp}${degrees}</p>
+      <p class="weather-high animated fadeIn">High:</p>
+      <p class="weather-high-temp animated fadeIn">${dailyHighTemp}${degrees}</p>
+      <p class="weather-low animated fadeIn">Low: </p>
+      <p class="weather-low-temp animated fadeIn">${dailyLowTemp}${degrees}</p>
     </div>
     <p class="weather-summary animated fadeIn">${dailySummary}</p>
   `);
@@ -70,14 +72,15 @@ app.getCoordinates = () => {
 app.currentTime = () => {
   window.setInterval(function() {
     const today = new Date();
-    let hours = `${today.getHours()}`;
-    let hoursInDay = `${today.getHours()}`;
+    let hours = parseInt(today.getHours());
     let timeOfDay = 'am'
-    if (hoursInDay >= 12 && hoursInDay !== 24) {
+    if (hours >= 12 && hours !== 24) {
       timeOfDay = 'pm'
     }
     if (hours >= 13) {
       hours = hours - 12;
+    } else if (hours === 0) {
+      hours = hours + 12;
     }
     let minutes = `${today.getMinutes()}`;
     minutes = app.checkTime(minutes);
