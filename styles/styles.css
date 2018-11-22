@@ -142,6 +142,19 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0);
+  overflow: hidden; }
+
 @media (max-width: 650px) {
   .grid-container {
     grid-template-columns: 1fr 1fr;
@@ -216,33 +229,6 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   font-size: 1.6rem;
   margin-bottom: 0; }
 
-.date-time {
-  padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-  -ms-flex-direction: column-reverse;
-  flex-direction: column-reverse;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-
-.time {
-  margin: 0;
-  font-size: 5rem; }
-
-.date {
-  margin-bottom: 0;
-  font-size: 1.6rem;
-  text-align: center; }
-
-.date-container {
-  text-align: center; }
-
 .unsplash-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -275,6 +261,26 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     -o-object-fit: cover;
     object-fit: cover;
     cursor: pointer; }
+
+.image-modal {
+  position: fixed;
+  z-index: 1000;
+  top: 10%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80%;
+  max-width: 80%;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.4); }
+
+.fa-times {
+  margin: 1rem;
+  cursor: pointer;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  border-radius: 5px; }
 
 .wrapper {
   max-width: 1600px; }
