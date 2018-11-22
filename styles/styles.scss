@@ -2,7 +2,12 @@
 @import 'partials/setup';
 @import 'partials/media-queries';
 @import 'partials/weather';
+<<<<<<< HEAD
+@import 'partials/unsplash';
+
+=======
 @import 'partials/date-time';
+>>>>>>> 0d37de448b12dabdf8bd81879736e969d32894a6
 
 .wrapper{
    max-width: 1600px;
@@ -13,6 +18,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr 2fr;
   height: 100vh;
+//   animation: scroll-grid 180s linear infinite;
 }
 
 .grid-item{
@@ -33,11 +39,18 @@
 }
 
 .news {
-  grid-column: 3 / 5;
-  grid-row: 2/4;
+   grid-column: 3 / 5;
+   grid-row: 2/4;
 }
 
 .unsplash {
-  grid-row: 3 / 4;
-  grid-column: span 2;
+   grid-row: 3 / 4;
+   grid-column: span 2;
+   min-height: 430px;
+   overflow-x: auto;
+   overflow-y: hidden;
+   -webkit-overflow-scrolling: touch;
+   &::-webkit-scrollbar {
+    display: none;
+  }
 }

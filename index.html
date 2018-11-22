@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   <link rel="stylesheet" href="styles/styles.css">
 </head>
+
 <body>
   <main>
     <div class="wrapper">
@@ -22,13 +24,14 @@
           </div>
         </div>
         <div class="grid-item weather">
-          
+
         </div>
         <div class="grid-item hacker-news">
           <p>Hacker News</p>
         </div>
         <div class="grid-item unsplash">
-          <p>Unsplash</p>
+          <input class="unsplash-search" type="text" placeholder="Search">
+          <div class="unsplash-images"></div>
         </div>
         <div class="grid-item news">
           <p>News with Catg</p>
@@ -39,7 +42,7 @@
 
   <div style="display: none;">
     <h1>Hello, World!</h1>
-  
+
     <div id="weather">
       <h2>Weather</h2>
     </div>
@@ -48,7 +51,9 @@
 
   </div>
 
-  <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+    crossorigin='anonymous'></script>
   <script src="scripts/app.js"></script>
 </body>
+
 </html>
