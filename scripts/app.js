@@ -10,6 +10,7 @@ app.getPhotos = (q) => {
     dataType: 'JSON',
     data: {
       query: q,
+      orientation: 'squarish',
       count: 14
     }
   }).then((res) => {
