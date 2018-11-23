@@ -1,5 +1,5 @@
 const app = {};
-
+app.appName = 'UDash'
 // UNSPLASH
 app.unsplashClientID = '312de5ede65d57c255d22fc5a82552c05c3dc0fde821f66cfe2bef2ad716f8af';
 app.unsplashUrl = `https://api.unsplash.com/photos/random/?client_id=${app.unsplashClientID}`;
@@ -10,6 +10,7 @@ app.getPhotos = (q) => {
     dataType: 'JSON',
     data: {
       query: q,
+      orientation: 'squarish',
       count: 14
     }
   }).then((res) => {
@@ -22,12 +23,65 @@ app.displayPhotoResults = (res) => {
   console.log(res);
   let results='';
   for(let i = 0; i < res.length; i++){
-    results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" data-url="${res[i].urls.full}">`;
+    results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" 
+    data-url="${res[i].urls.full}" data-download-url="${res[i].links.download}" data-tracking="${res[i].links.download_location}"
+    data-creator-url="${res[i].user.links.html}" data-creator-name="${res[i].user.name}" 
+    data-creator-pic="${res[i].user.profile_image.large}" data-index="${i}">`;
   }
   $('.unsplash-images').append(results);
-  $('.unsplash-image').on('click', function(){
-    console.log($(this).attr('data-url'));
+  app.unsplashModal();
+}
+
+// Keep track of downloads triggered for the artist as per the API docs 
+app.downloadTrigger = (trackingLink) => {
+  try {
+    const unsplashDownloadTracker = fetch(trackingLink)
+      .then(function (res) {
+        return res.json()
+      })
+      .then(function (data) {
+      })
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+app.unsplashModal = () =>{
+  let downloadURLTracking='';
+  $('.unsplash-image').on('click', function () {
+    $('.image-info').empty();
+    bgURL = $(this).attr('data-url');
+    // information requested by unsplash API
+    const downloadURL = $(this).attr('data-download-url');
+    downloadURLTracking = `${$(this).attr('data-tracking')}?client_id=${app.clientID}`;
+    const creatorURL = $(this).attr('data-creator-url');
+    const createrName = $(this).attr('data-creator-name');
+    const createrImage = $(this).attr('data-creator-pic');
+    const attributionPhotoBy = `${creatorURL}?utm_source=${app.appName}&utm_medium=referral`;
+    const atrributionUnsplash = `https://unsplash.com/?utm_source=y${app.appName}&utm_medium=referral`;
+    const downloadButton = `<a href="${downloadURL}?force=download"><button class="download"><i class="fas fa-download fa-btn"></i><span class="visually-hidden">Download Button</span></button></a>`;
+    const photoBy = `
+    <a class="creator" target="blank" href="${attributionPhotoBy}"><div class="display-pic"></div> ${createrName}</a>`;
+    const unsplashCredit = `<a class="unsplash-credit" target="blank" href=${atrributionUnsplash}>Unsplash</a>`;
+    // showing the image in a modal when clicked
+    $('.image-modal').css('display', `block`);
+    $('.image-modal').css('background', `url(${bgURL}) center center`);
+    $('.image-modal').css('background-size', `cover`);
+    // showing the creator info when image clicked
+    $('.image-info').append(photoBy, unsplashCredit, downloadButton);
+    $('.display-pic').css({ 'border-radius': '50%', 'background': 'url(' + createrImage + ')', 'background-size': 'cover', 'background-position': 'center', 'width': '50px', 'height': '50px', 'border': '2px solid #808080', 'margin': '0.5rem' });  
   });
+
+  $('.close-btn').on('click', function () {
+    $('.image-modal').css('display', 'none');
+  });
+
+  $('.download').on('click', function () {
+    console.log(downloadURLTracking);
+    app.downloadTrigger(downloadURLTracking);
+  });
+
 }
 
 // WEATHER API
@@ -216,6 +270,13 @@ app.init = () => {
     console.log($('.unsplash-search').val());
     app.getPhotos($('.unsplash-search').val());
   });
+  // hover on image modal
+  $('.image-modal').hover(function () {
+    $('.image-info').css('display', 'block');
+  }, function () {
+    $('.image-info').css('display', 'none');
+  });
+  
   app.getCoordinates(); // Weather section
   app.currentDate(); // Date & Time tile
   app.currentTime(); // Date & Time tile
