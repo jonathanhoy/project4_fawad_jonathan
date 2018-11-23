@@ -411,7 +411,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 1rem;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #ffffff;
   padding-bottom: 1rem;
   margin-bottom: 1rem; }
 
@@ -439,7 +439,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  border-bottom: 1px solid grey;
+  border-bottom: 2px solid #ffffff;
   padding-bottom: 1rem;
   margin-bottom: 1rem; }
   .news-form h2 {
