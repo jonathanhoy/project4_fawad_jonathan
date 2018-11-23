@@ -17,6 +17,7 @@ app.getPhotos = (q) => {
     app.displayPhotoResults(res);
   });
 }
+
 app.displayPhotoResults = (res) => {
   $('.unsplash-images').empty();
   console.log(res);
@@ -25,19 +26,35 @@ app.displayPhotoResults = (res) => {
     results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" 
     data-url="${res[i].urls.full}" data-download-url="${res[i].links.download}" data-tracking="${res[i].links.download_location}"
     data-creator-url="${res[i].user.links.html}" data-creator-name="${res[i].user.name}" 
-    data-creator-pic="${res[i].user.profile_image.large}" >`;
+    data-creator-pic="${res[i].user.profile_image.large}" data-index="${i}">`;
   }
   $('.unsplash-images').append(results);
   app.unsplashModal();
 }
 
+// Keep track of downloads triggered for the artist as per the API docs 
+app.downloadTrigger = (trackingLink) => {
+  try {
+    const unsplashDownloadTracker = fetch(trackingLink)
+      .then(function (res) {
+        return res.json()
+      })
+      .then(function (data) {
+      })
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
 app.unsplashModal = () =>{
+  let downloadURLTracking='';
   $('.unsplash-image').on('click', function () {
     $('.image-info').empty();
     bgURL = $(this).attr('data-url');
     // information requested by unsplash API
     const downloadURL = $(this).attr('data-download-url');
-    const downloadURLTracking = `${$(this).attr('data-tracking')}?client_id=${app.clientID}`;
+    downloadURLTracking = `${$(this).attr('data-tracking')}?client_id=${app.clientID}`;
     const creatorURL = $(this).attr('data-creator-url');
     const createrName = $(this).attr('data-creator-name');
     const createrImage = $(this).attr('data-creator-pic');
@@ -56,15 +73,13 @@ app.unsplashModal = () =>{
     $('.display-pic').css({ 'border-radius': '50%', 'background': 'url(' + createrImage + ')', 'background-size': 'cover', 'background-position': 'center', 'width': '50px', 'height': '50px', 'border': '2px solid #808080', 'margin': '0.5rem' });  
   });
 
-  $('.modal-control').on('click', function () {
-    let nextURL = $('.unsplash-image').next().attr('data-url');
-    console.log("Next URL:" + nextURL);
-    $('.image-modal').css('background', `url(${nextURL}) center center`);
-    $('.image-modal').css('background-size', `cover`);
-  });
-
   $('.close-btn').on('click', function () {
     $('.image-modal').css('display', 'none');
+  });
+
+  $('.download').on('click', function () {
+    console.log(downloadURLTracking);
+    app.downloadTrigger(downloadURLTracking);
   });
 
 }

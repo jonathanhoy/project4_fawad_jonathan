@@ -324,14 +324,6 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   cursor: pointer;
   z-index: 3000; }
 
-.modal-control {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 1rem;
-  cursor: pointer;
-  z-index: 3000; }
-
 .unsplash-credit {
   position: absolute;
   left: 47%;
