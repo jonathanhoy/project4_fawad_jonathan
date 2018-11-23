@@ -276,16 +276,47 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .date-container {
   text-align: center; }
 
-.news {
-  padding: 1rem; }
-
-.news-container {
+.news-tile {
+  padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.news {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 100%; }
+
+.news-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1rem; }
+
+.news-image {
+  grid-column: 1 / 2; }
 
 .news-title {
-  font-size: 2rem; }
+  grid-column: 2 / 3;
+  font-size: 2rem;
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin: 0; }
+
+.news-link {
+  text-decoration: none;
+  color: black; }
 
 .wrapper {
   max-width: 1600px; }
@@ -309,7 +340,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .weather {
   grid-column: 4/5; }
 
-.news {
+.news-tile {
   grid-column: 3 / 5;
   grid-row: 2/4; }
 

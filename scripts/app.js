@@ -169,14 +169,12 @@ app.displayNewsResults = (res) => {
 
 // NEW YORK TIMES
 
-app.nytUrl = "https://api.nytimes.com/svc/topstories/v2/world.json";
-app.nytUrl += '?' + $.param({
-  'api-key': "b6adbb67b7d9458997ba0b2b5bed2846"
-});
-app.getNyt = () => {
+app.nytApiKey = `api-key=b6adbb67b7d9458997ba0b2b5bed2846`;
+
+app.getNyt = (category) => {
   $.ajax({
-    url: app.nytUrl,
-    method: 'GET',
+    url: `https://api.nytimes.com/svc/topstories/v2/${category}.json?${app.nytApiKey}`,
+    method: 'GET'
   }).then((res) => {
     console.log(res.results)
     app.displayNytArticles(res);
@@ -184,16 +182,23 @@ app.getNyt = () => {
 }
 
 app.displayNytArticles = (res) => {
-  for (let i = 0; i < 3; i++) {
+  $('.news').empty();
+  for (let i = 0; i < 4; i++) {
     $('.news').append(`
       <div class="news-container">
-        <img src="${res.results[i].multimedia[0].url}">
-        <h2 class="news-title"><a href="${res.results[i].url}" target="_blank">${res.results[i].title}</a></h2>
+        <a href="${res.results[i].url}" target="_blank"><img src="${res.results[i].multimedia[2].url}" class="news-image"></a>
+        <h2 class="news-title"><a href="${res.results[i].url}" target="_blank" class="news-link">${res.results[i].title}</a></h2>
       </div>
     `);
   }
 }
 
+app.getNewCategory = () => {
+  $('#category').on('change', function() {
+    const newCategory = $(this).val();
+    app.getNyt(newCategory);
+  })
+}
 
 
 
@@ -208,7 +213,8 @@ app.init = () => {
   app.getCoordinates();
   app.currentDate();
   app.currentTime();
-  app.getNyt();
+  app.getNyt('world');
+  app.getNewCategory();
 }
 
 $(() => {
