@@ -20,7 +20,6 @@ app.getPhotos = (q) => {
 
 app.displayPhotoResults = (res) => {
   $('.unsplash-images').empty();
-  console.log(res);
   let results='';
   for(let i = 0; i < res.length; i++){
     results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" 
@@ -267,6 +266,12 @@ app.getNewCategory = () => {
 
 app.init = () => {
   app.getPhotos();
+  // random wallapaper for the Grid Container
+  const randomWallpaper = ['wallpaper-1', 'wallpaper-2', 'wallpaper-3'];
+  const randomPic = randomWallpaper[Math.floor(Math.random() * randomWallpaper.length)];
+  $('.grid-container').css('background',
+    `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/${randomPic}.jpg') center center`);
+  $('.grid-container').css('background-size','cover');
   $('.unsplash-search').on('change',function (e) {
     e.preventDefault();
     console.log($('.unsplash-search').val());

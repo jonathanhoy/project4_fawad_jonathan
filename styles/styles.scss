@@ -11,14 +11,11 @@
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 1fr 2fr;
-  height: 100vh;
-//   animation: scroll-grid 180s linear infinite;
-   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1532288440902-6d2073a7de5b?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjMxMjYxfQ&s=95972163d9da923620c01da620ba1520');
-   background-position: center center;
-   background-size: cover; 
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   grid-template-rows: 1fr 1fr 2fr;
+   height: 100vh;
+   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
 }
 
 .grid-item{
