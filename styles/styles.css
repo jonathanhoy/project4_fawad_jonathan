@@ -403,10 +403,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  height: 100%; }
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll; }
 
 .news-container {
   display: grid;
@@ -450,6 +449,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   font-size: 1.6rem;
   width: 100px; }
 
+.news-link, .headlines {
+  color: #ffffff; }
+
 .wrapper {
   max-width: 1600px; }
 
@@ -457,14 +459,20 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr 2fr;
-  height: 100vh; }
-
-.grid-item {
-  border: 1px solid black; }
+  height: 100vh;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("https://images.unsplash.com/photo-1532288440902-6d2073a7de5b?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjMxMjYxfQ&s=95972163d9da923620c01da620ba1520");
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1532288440902-6d2073a7de5b?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjMxMjYxfQ&s=95972163d9da923620c01da620ba1520");
+  background: -o-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1532288440902-6d2073a7de5b?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjMxMjYxfQ&s=95972163d9da923620c01da620ba1520");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1532288440902-6d2073a7de5b?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjMxMjYxfQ&s=95972163d9da923620c01da620ba1520");
+  background-position: center center;
+  background-size: cover; }
 
 .hacker-news {
   grid-column: 1/3;
   grid-row: 1/3; }
+
+.weather, .date-time {
+  color: #ffffff; }
 
 .date-time {
   grid-column: 3/4; }

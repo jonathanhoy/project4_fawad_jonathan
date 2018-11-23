@@ -243,13 +243,15 @@ app.getNyt = (category) => {
 
 app.displayNytArticles = (res) => {
   $('.news').empty();
-  for (let i = 0; i < 5; i++) {
-    $('.news').append(`
-      <div class="news-container animated fadeIn">
-        <a href="${res.results[i].url}" target="_blank"><img src="${res.results[i].multimedia[0].url}" class="news-image"></a>
-        <p class="news-title"><a href="${res.results[i].url}" target="_blank" class="news-link">${res.results[i].title}</a></p>
-      </div>
-    `);
+  for (let i = 0; i < res.results.length; i++) {
+    if (res.results[i].multimedia.length != 0) {
+      $('.news').append(`
+        <div class="news-container animated fadeIn">
+          <a href="${res.results[i].url}" target="_blank"><img src="${res.results[i].multimedia[0].url}" class="news-image"></a>
+          <p class="news-title"><a href="${res.results[i].url}" target="_blank" class="news-link">${res.results[i].title}</a></p>
+        </div>
+      `);
+    }
   }
 }
 
@@ -264,7 +266,7 @@ app.getNewCategory = () => {
 
 
 app.init = () => {
-  // app.getPhotos();
+  app.getPhotos();
   $('.unsplash-search').on('change',function (e) {
     e.preventDefault();
     console.log($('.unsplash-search').val());
@@ -276,7 +278,6 @@ app.init = () => {
   }, function () {
     $('.image-info').css('display', 'none');
   });
-  
   app.getCoordinates(); // Weather section
   app.currentDate(); // Date & Time tile
   app.currentTime(); // Date & Time tile

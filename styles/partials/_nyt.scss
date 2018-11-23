@@ -7,8 +7,9 @@
 .news {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .news-container {
@@ -52,4 +53,8 @@
 .news-category {
   font-size: 1.6rem;
   width: 100px;
+}
+
+.news-link, .headlines{
+  color: #ffffff;
 }
