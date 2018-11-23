@@ -39,11 +39,75 @@
    background: rgba(0, 0, 0, 0.4);
 }
 
-.fa-times{
+.image-info{
+   @extend .image-modal;
+   display: none;
+	position: absolute;
+   z-index: 2000;
+   height: 100%;
+   max-width: 100%;
+   top: 0;
+}
+
+.creator{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   color: #ffffff;
+}
+
+.download{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0 ,0, .2);
+	padding: 1rem;
+	margin: 1rem;
+	border-radius: 5px;
+	border: 2px solid #808080;
+	cursor: pointer;
+}
+
+.fa-btn{
+	color: #ffffff;
+	font-size: 25px;
+}
+
+.close-btn{
+   position: absolute;
+   left: 0;
+   top: 0;
    margin: 1rem;
    cursor: pointer;
-   color: #ffffff;
-   background: rgba(0,0,0,0.8);
-   padding: 1rem;
-   border-radius: 5px;
+   z-index: 3000;
+}
+
+.modal-control{
+   position: absolute;
+   right: 0;
+   top: 0;
+   margin: 1rem;
+   cursor: pointer;
+   z-index: 3000;
+}
+
+.unsplash-credit{
+	position: absolute;
+	left: 47%;
+	bottom: 0;
+	padding: 1rem;
+	margin: 1rem;
+	font-size: 1.6rem;
+	color: #ffffff;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	text-decoration: underline;
+}
+
+.unsplash-credit:hover{
+	color: #d3d3d3;
 }
