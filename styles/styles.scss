@@ -2,12 +2,9 @@
 @import 'partials/setup';
 @import 'partials/media-queries';
 @import 'partials/weather';
-<<<<<<< HEAD
 @import 'partials/unsplash';
-
-=======
 @import 'partials/date-time';
->>>>>>> 0d37de448b12dabdf8bd81879736e969d32894a6
+@import 'partials/nyt';
 
 .wrapper{
    max-width: 1600px;
@@ -38,7 +35,7 @@
    grid-column: 4/5;
 }
 
-.news {
+.news-tile {
    grid-column: 3 / 5;
    grid-row: 2/4;
 }
