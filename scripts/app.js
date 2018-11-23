@@ -236,7 +236,7 @@ app.getNyt = (category) => {
     url: `https://api.nytimes.com/svc/topstories/v2/${category}.json?${app.nytApiKey}`,
     method: 'GET'
   }).then((res) => {
-    // console.log(res.results)
+    console.log(res.results)
     app.displayNytArticles(res);
   });
 }
