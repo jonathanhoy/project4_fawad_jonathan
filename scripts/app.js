@@ -53,7 +53,6 @@ app.displayWeatherResults = (res) => {
   const dailyHighTemp = Math.floor(res.daily.data[0].temperatureHigh);
   const dailyLowTemp = Math.floor(res.daily.data[0].temperatureLow);
   const dailySummary = res.daily.data[0].summary;
-  console.log(res);
   let icon = res.currently.icon;
   if (icon === 'sleet') {
     icon = 'snow';
@@ -217,11 +216,11 @@ app.init = () => {
     console.log($('.unsplash-search').val());
     app.getPhotos($('.unsplash-search').val());
   });
-  app.getCoordinates();
-  app.currentDate();
-  app.currentTime();
-  app.getNyt('world');
-  app.getNewCategory();
+  app.getCoordinates(); // Weather section
+  app.currentDate(); // Date & Time tile
+  app.currentTime(); // Date & Time tile
+  app.getNyt('world'); // New York Times
+  app.getNewCategory(); // Updates NYT section
 }
 
 $(() => {
