@@ -97,7 +97,6 @@ app.getWeather = (lat = 43.6532, lng = -79.3832) => {
       units: 'ca'
     }
   }).then((res) => {
-    console.log(res);
     app.displayWeatherResults(res);
   })
 }
@@ -108,12 +107,19 @@ app.displayWeatherResults = (res) => {
   const dailyHighTemp = Math.floor(res.daily.data[0].temperatureHigh);
   const dailyLowTemp = Math.floor(res.daily.data[0].temperatureLow);
   const dailySummary = res.daily.data[0].summary;
+  let icon = res.currently.icon;
+  if (icon === 'sleet') {
+    icon = 'snow';
+  } else if (icon === 'fog') {
+    icon = 'cloudy'
+  };
   $('.weather').append(`
     <div class="weather-temps animated fadeIn">
       <p class="weather-current animated fadeIn">${currentTemp}${degrees}</p>
-      <p class="weather-high animated fadeIn">High:</p>
+      <img src="../assets/${icon}.svg" class="weather-icon animated fadeIn">
+      <p class="weather-high animated fadeIn">H</p>
       <p class="weather-high-temp animated fadeIn">${dailyHighTemp}${degrees}</p>
-      <p class="weather-low animated fadeIn">Low: </p>
+      <p class="weather-low animated fadeIn">L</p>
       <p class="weather-low-temp animated fadeIn">${dailyLowTemp}${degrees}</p>
     </div>
     <p class="weather-summary animated fadeIn">${dailySummary}</p>
@@ -219,6 +225,44 @@ app.displayNewsResults = (res) => {
   })
 }
 
+
+
+// NEW YORK TIMES
+
+app.nytApiKey = `api-key=b6adbb67b7d9458997ba0b2b5bed2846`;
+
+app.getNyt = (category) => {
+  $.ajax({
+    url: `https://api.nytimes.com/svc/topstories/v2/${category}.json?${app.nytApiKey}`,
+    method: 'GET'
+  }).then((res) => {
+    // console.log(res.results)
+    app.displayNytArticles(res);
+  });
+}
+
+app.displayNytArticles = (res) => {
+  $('.news').empty();
+  for (let i = 0; i < 5; i++) {
+    $('.news').append(`
+      <div class="news-container animated fadeIn">
+        <a href="${res.results[i].url}" target="_blank"><img src="${res.results[i].multimedia[0].url}" class="news-image"></a>
+        <p class="news-title"><a href="${res.results[i].url}" target="_blank" class="news-link">${res.results[i].title}</a></p>
+      </div>
+    `);
+  }
+}
+
+app.getNewCategory = () => {
+  $('.news-category').on('change', function() {
+    const newCategory = $(this).val();
+    app.getNyt(newCategory);
+  })
+}
+
+
+
+
 app.init = () => {
   // app.getPhotos();
   $('.unsplash-search').on('change',function (e) {
@@ -232,10 +276,12 @@ app.init = () => {
   }, function () {
     $('.image-info').css('display', 'none');
   });
-
-  app.getCoordinates();
-  app.currentDate();
-  app.currentTime();
+  
+  app.getCoordinates(); // Weather section
+  app.currentDate(); // Date & Time tile
+  app.currentTime(); // Date & Time tile
+  app.getNyt('world'); // New York Times
+  app.getNewCategory(); // Updates NYT section
 }
 
 $(() => {
