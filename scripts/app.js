@@ -84,55 +84,62 @@ app.unsplashModal = () =>{
 
 }
 
-// WEATHER API
 
-app.weatherApiKey = 'aabc3958afb1ab39dcbe55a9d3801b80';
+// WEATHER BIT API
 
-app.getWeather = (lat = 43.6532, lng = -79.3832) => {
+app.weatherBitApiKey = '31c8603c22634ebeab1e5b95384a3b2d';
+app.getCurrWeatherUrl = ' http://api.weatherbit.io/v2.0/current';
+app.getForecastWeatherUrl = ' http://api.weatherbit.io/v2.0/forecast/daily';
+
+app.callCurrWeather = () => {
   $.ajax({
-    url: `https://api.darksky.net/forecast/${app.weatherApiKey}/${lat},${lng}`,
-    dataType: 'JSONP',
+    url: app.getCurrWeatherUrl,
+    dataType: 'JSON',
     method: 'GET',
     data: {
-      units: 'ca'
+      key: app.weatherBitApiKey,
+      ip: 'auto'
     }
   }).then((res) => {
-    app.displayWeatherResults(res);
+    console.log(res);
+    app.displayCurrWeather(res);
   })
 }
 
-app.displayWeatherResults = (res) => {
-  const degrees = `&#176;C`
-  const currentTemp = Math.floor(res.currently.temperature);
-  const dailyHighTemp = Math.floor(res.daily.data[0].temperatureHigh);
-  const dailyLowTemp = Math.floor(res.daily.data[0].temperatureLow);
-  const dailySummary = res.daily.data[0].summary;
-  let icon = res.currently.icon;
-  if (icon === 'sleet') {
-    icon = 'snow';
-  } else if (icon === 'fog') {
-    icon = 'cloudy'
-  };
-  $('.weather').append(`
-    <div class="weather-temps animated fadeIn">
-      <p class="weather-current animated fadeIn">${currentTemp}${degrees}</p>
-      <img src="../assets/${icon}.svg" class="weather-icon animated fadeIn">
-      <p class="weather-high animated fadeIn">H</p>
-      <p class="weather-high-temp animated fadeIn">${dailyHighTemp}${degrees}</p>
-      <p class="weather-low animated fadeIn">L</p>
-      <p class="weather-low-temp animated fadeIn">${dailyLowTemp}${degrees}</p>
-    </div>
-    <p class="weather-summary animated fadeIn">${dailySummary}</p>
+app.displayCurrWeather = (res) => {
+  const currentWeather = Math.floor(res.data[0].temp);
+  const city = res.data[0].city_name;
+  const icon = res.data[0].weather.icon;
+  $('.weather-container').append(`
+    <p class="weather-city">${city}</p>
+    <p class="weather-current">${currentWeather}</p>
+    <img src="../assets/${icon}.png">
   `);
 }
 
-app.getCoordinates = () => {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
-    app.getWeather(lat, lng);
-  });
-}
+// app.callForecast = () => {
+//   $.ajax({
+//     url: app.getForecastWeatherUrl,
+//     dataType: 'JSON',
+//     method: 'GET',
+//     data: {
+//       key: app.weatherBitApiKey,
+//       ip: 'auto'
+//     }
+//   }).then((res) => {
+//     console.log(res)
+//     app.displayForecast(res);
+//   })
+// }
+
+// app.displayForecast = (res) => {
+//   const high = Math.floor(res.data[0].max_temp);
+//   const low = Math.floor(res.data[0].min_temp);
+//   $('.weather-container').append(`
+//     <p class="weather-high"> H ${high}</p>
+//     <p class="weather-low"> L ${low}</p>
+//   `);
+// }
 
 // DATE AND TIME
 // credit: https://tecadmin.net/get-current-date-time-javascript/
@@ -236,7 +243,7 @@ app.getNyt = (category) => {
     url: `https://api.nytimes.com/svc/topstories/v2/${category}.json?${app.nytApiKey}`,
     method: 'GET'
   }).then((res) => {
-    console.log(res.results)
+    // console.log(res.results)
     app.displayNytArticles(res);
   });
 }
@@ -266,7 +273,7 @@ app.getNewCategory = () => {
 
 
 app.init = () => {
-  app.getPhotos();
+  // app.getPhotos();
   $('.unsplash-search').on('change',function (e) {
     e.preventDefault();
     console.log($('.unsplash-search').val());
@@ -278,7 +285,9 @@ app.init = () => {
   }, function () {
     $('.image-info').css('display', 'none');
   });
-  app.getCoordinates(); // Weather section
+
+  app.callCurrWeather();
+  app.callForecast();
   app.currentDate(); // Date & Time tile
   app.currentTime(); // Date & Time tile
   app.getNyt('world'); // New York Times
