@@ -101,7 +101,7 @@ app.callCurrWeather = (city) => {
       city: city
     }
   }).then((res) => {
-    // console.log(res);
+    console.log(res);
     app.displayCurrWeather(res);
   })
 }
@@ -110,8 +110,9 @@ app.degrees = `&deg;C`
 app.displayCurrWeather = (res) => {
   const currentWeather = Math.floor(res.data[0].temp);
   const city = res.data[0].city_name;
+  const country = res.data[0].country_code;
   const icon = res.data[0].weather.icon;
-  $('.city-input').attr('placeholder', `${city}`);
+  $('.city-input').attr('placeholder', `${city}, ${country}`);
   $('.weather-container').append(`
     <p class="weather-current">${currentWeather}${app.degrees}</p>
     <img src="../assets/${icon}.png" class="weather-icon">

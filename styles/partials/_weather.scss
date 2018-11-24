@@ -1,19 +1,17 @@
 .weather {
-  padding: 0 1rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  // border: 1px solid white;
 }
 
 .city-input {
   border: none;
-  // background: rgba(33,33,33,0.5);
   background: none;
   text-align: center;
   color: white;
-  // font-size: 1.6rem;
+  font-size: 1.6rem;
   text-transform: capitalize;
   &::placeholder {
     color: white;
@@ -23,16 +21,8 @@
 
 .weather-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 0.65fr 1fr;
   grid-template-rows: auto;
-}
-
-.weather-city {
-  grid-column: 1 / 5;
-  grid-row: 1 / 2;
-  text-align: center;
-  font-size: 2.5rem;
-  margin: 0;
 }
 
 .weather-current {
@@ -49,6 +39,7 @@
   grid-row: 2 / 4;
   width: 75%;
   justify-self: center;
+  align-self: center;
 }
 
 .weather-high {
