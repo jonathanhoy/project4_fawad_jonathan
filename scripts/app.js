@@ -138,8 +138,8 @@ app.displayForecast = (res) => {
   const high = Math.floor(res.data[0].max_temp);
   const low = Math.floor(res.data[0].min_temp);
   $('.weather-container').append(`
-    <p class="weather-high"> H ${high}${app.degrees}</p>
-    <p class="weather-low"> L ${low}${app.degrees}</p>
+    <p class="weather-high">H ${high}${app.degrees}</p>
+    <p class="weather-low">L ${low}${app.degrees}</p>
   `);
 }
 
