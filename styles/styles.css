@@ -173,7 +173,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
     grid-row: auto; } }
 
 .weather {
-  padding: 1rem;
+  padding: 0 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -186,6 +186,68 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; }
+
+.city-input {
+  border: none;
+  background: none;
+  text-align: center;
+  color: white;
+  text-transform: capitalize; }
+  .city-input::-webkit-input-placeholder {
+    color: white;
+    opacity: 1; }
+  .city-input:-ms-input-placeholder {
+    color: white;
+    opacity: 1; }
+  .city-input::-ms-input-placeholder {
+    color: white;
+    opacity: 1; }
+  .city-input::placeholder {
+    color: white;
+    opacity: 1; }
+
+.weather-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto; }
+
+.weather-city {
+  grid-column: 1 / 5;
+  grid-row: 1 / 2;
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0; }
+
+.weather-current {
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
+  font-size: 5rem;
+  margin: 0;
+  -ms-flex-item-align: center;
+  align-self: center;
+  text-align: center; }
+
+.weather-icon {
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
+  width: 75%;
+  justify-self: center; }
+
+.weather-high {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+  margin: 0;
+  -ms-flex-item-align: end;
+  align-self: end;
+  text-align: center; }
+
+.weather-low {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+  margin: 0;
+  text-align: center;
+  -ms-flex-item-align: start;
+  align-self: start; }
 
 .unsplash-form {
   display: -webkit-box;

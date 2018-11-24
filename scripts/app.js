@@ -91,55 +91,66 @@ app.weatherBitApiKey = '31c8603c22634ebeab1e5b95384a3b2d';
 app.getCurrWeatherUrl = ' http://api.weatherbit.io/v2.0/current';
 app.getForecastWeatherUrl = ' http://api.weatherbit.io/v2.0/forecast/daily';
 
-app.callCurrWeather = () => {
+app.callCurrWeather = (city) => {
   $.ajax({
     url: app.getCurrWeatherUrl,
     dataType: 'JSON',
     method: 'GET',
     data: {
       key: app.weatherBitApiKey,
-      ip: 'auto'
+      city: city
     }
   }).then((res) => {
-    console.log(res);
+    // console.log(res);
     app.displayCurrWeather(res);
   })
 }
 
+app.degrees = `&deg;C`
 app.displayCurrWeather = (res) => {
   const currentWeather = Math.floor(res.data[0].temp);
   const city = res.data[0].city_name;
   const icon = res.data[0].weather.icon;
+  $('.city-input').attr('placeholder', `${city}`);
   $('.weather-container').append(`
-    <p class="weather-city">${city}</p>
-    <p class="weather-current">${currentWeather}</p>
-    <img src="../assets/${icon}.png">
+    <p class="weather-current">${currentWeather}${app.degrees}</p>
+    <img src="../assets/${icon}.png" class="weather-icon">
   `);
 }
 
-// app.callForecast = () => {
-//   $.ajax({
-//     url: app.getForecastWeatherUrl,
-//     dataType: 'JSON',
-//     method: 'GET',
-//     data: {
-//       key: app.weatherBitApiKey,
-//       ip: 'auto'
-//     }
-//   }).then((res) => {
-//     console.log(res)
-//     app.displayForecast(res);
-//   })
-// }
+app.callForecast = (city) => {
+  $.ajax({
+    url: app.getForecastWeatherUrl,
+    dataType: 'JSON',
+    method: 'GET',
+    data: {
+      key: app.weatherBitApiKey,
+      city: city
+    }
+  }).then((res) => {
+    // console.log(res)
+    app.displayForecast(res);
+  })
+}
 
-// app.displayForecast = (res) => {
-//   const high = Math.floor(res.data[0].max_temp);
-//   const low = Math.floor(res.data[0].min_temp);
-//   $('.weather-container').append(`
-//     <p class="weather-high"> H ${high}</p>
-//     <p class="weather-low"> L ${low}</p>
-//   `);
-// }
+app.displayForecast = (res) => {
+  const high = Math.floor(res.data[0].max_temp);
+  const low = Math.floor(res.data[0].min_temp);
+  $('.weather-container').append(`
+    <p class="weather-high"> H ${high}${app.degrees}</p>
+    <p class="weather-low"> L ${low}${app.degrees}</p>
+  `);
+}
+
+app.getNewCity = () => {
+  $('.weather-form').on('submit', (e) => {
+    e.preventDefault();
+    newCity = $('.city-input').val();
+    $('.weather-container').empty();
+    app.callCurrWeather(newCity);
+    app.callForecast(newCity);
+  })
+}
 
 // DATE AND TIME
 // credit: https://tecadmin.net/get-current-date-time-javascript/
@@ -286,8 +297,9 @@ app.init = () => {
     $('.image-info').css('display', 'none');
   });
 
-  app.callCurrWeather();
-  app.callForecast();
+  app.callCurrWeather('Toronto, Canada'); // Weatherbit
+  app.callForecast('Toronto, Canada'); // Weatherbit
+  app.getNewCity(); // Weatherbit
   app.currentDate(); // Date & Time tile
   app.currentTime(); // Date & Time tile
   app.getNyt('world'); // New York Times
