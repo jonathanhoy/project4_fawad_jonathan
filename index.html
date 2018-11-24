@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>UDash</title>
+  <title>U-Dash</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
@@ -18,18 +18,19 @@
     <div class="wrapper">
       <div class="grid-container">
         <div class="grid-item date-time">
-          <div class="date-container">
-            
-          </div>
-          <div class="time-container">
-
-          </div>
+          <div class="date-container"></div>
+          <div class="time-container"></div>
         </div>
-        <div class="grid-item weather">
-
-        </div>
-        <div class="grid-item hacker-news">
-          <p>Hacker News</p>
+        <div class="grid-item weather"></div>
+        <div class="grid-item tech-news">
+          <div class="tech-sources">
+            <button class="btn-source" value="wired">Wired</button>
+            <button class="btn-source" value="the-verge">The Verge</button>
+            <button class="btn-source" value="the-next-web">TNW</button>
+            <button class="btn-source" value="techcrunch">TechCrunch</button>
+          </div>
+          <h2 class="headlines tech-head">Wired</h2>
+          <div class="news-list"></div>
         </div>
         <div class="grid-item unsplash">
           <input class="unsplash-search" type="text" placeholder="Search">
@@ -50,9 +51,7 @@
               <option value="travel">Travel</option>
             </select>
           </form>
-          <div class="news">
-            
-          </div>
+          <div class="news"></div>
         </div>
       </div>
     </div>
@@ -62,6 +61,11 @@
     <i class="fas fa-times fa-btn close-btn"></i><span class="visually-hidden">Close Image</span>
     <div class="image-info"></div>
   </div>
+
+  <!-- <form method="get" action="https://www.google.com/search" target="_blank">
+    <input type="text" name="q" size="31" value="">
+    <input type="submit">
+  </form> -->
 
   <div style="display: none;">
     <h1>Hello, World!</h1>

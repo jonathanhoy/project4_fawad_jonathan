@@ -452,6 +452,29 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .news-link, .headlines {
   color: #ffffff; }
 
+.news-list {
+  color: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+.tech-sources {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
+  .tech-sources::-webkit-scrollbar {
+    display: none; }
+
+.btn-source {
+  display: block;
+  width: 100%;
+  min-width: 13.5rem;
+  margin-right: .5rem;
+  padding: 1rem 2rem;
+  border-radius: 5px; }
+
 .wrapper {
   max-width: 1600px; }
 
@@ -465,9 +488,15 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   background: -o-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); }
 
-.hacker-news {
+.tech-news {
   grid-column: 1/3;
-  grid-row: 1/3; }
+  grid-row: 1/3;
+  padding: 1rem 0 0 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
+  .tech-news::-webkit-scrollbar {
+    display: none; }
 
 .weather, .date-time {
   color: #ffffff; }
@@ -486,6 +515,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   grid-row: 3 / 4;
   grid-column: span 2;
   min-height: 430px;
+  padding-top: 1rem;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch; }
