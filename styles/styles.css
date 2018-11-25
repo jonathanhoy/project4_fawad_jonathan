@@ -187,43 +187,53 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -ms-flex-align: center;
   align-items: center; }
 
-.weather-temps {
+.city-input {
+  border: none;
+  background: none;
+  text-align: center;
+  color: white;
+  font-size: 1.6rem;
+  text-transform: capitalize; }
+  .city-input::-webkit-input-placeholder {
+    color: white;
+    opacity: 1; }
+  .city-input:-ms-input-placeholder {
+    color: white;
+    opacity: 1; }
+  .city-input::-ms-input-placeholder {
+    color: white;
+    opacity: 1; }
+  .city-input::placeholder {
+    color: white;
+    opacity: 1; }
+
+.weather-container {
   display: grid;
-  grid-template-columns: 2fr 50px 0.5fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 0.6fr 0.6fr 0.6fr;
+  grid-template-rows: auto;
   grid-column-gap: 10px; }
 
-.weather-current, .weather-high, .weather-low {
-  margin: 0;
-  justify-self: center; }
-
 .weather-current {
-  font-size: 5rem;
   grid-column: 1 / 2;
   grid-row: 1 / 3;
+  font-size: 5rem;
+  margin: 0;
   -ms-flex-item-align: center;
-  align-self: center; }
+  align-self: center;
+  text-align: center; }
 
 .weather-icon {
   grid-column: 2 / 3;
   grid-row: 1 / 3;
+  width: 75%;
+  justify-self: center;
   -ms-flex-item-align: center;
-  align-self: center;
-  justify-self: center; }
+  align-self: center; }
 
 .weather-high, .weather-low {
   grid-column: 3 / 4;
-  justify-self: end;
-  margin-right: 0.6rem; }
-
-.weather-high-temp, .weather-low-temp {
-  grid-column: 4 / 5;
   margin: 0;
   text-align: right; }
-
-.weather-high-temp {
-  -ms-flex-item-align: end;
-  align-self: end; }
 
 .weather-high {
   grid-row: 1 / 2;
@@ -234,15 +244,6 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   grid-row: 2 / 3;
   -ms-flex-item-align: start;
   align-self: start; }
-
-.weather-summary {
-  text-align: center;
-  font-size: 1.6rem;
-  margin-bottom: 0; }
-
-.weather-icon {
-  width: 100%;
-  display: block; }
 
 .unsplash-form {
   display: -webkit-box;
@@ -411,7 +412,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 1rem;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightgrey;
   padding-bottom: 1rem;
   margin-bottom: 1rem; }
 
@@ -439,7 +440,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightgrey;
   padding-bottom: 1rem;
   margin-bottom: 1rem; }
   .news-form h2 {
