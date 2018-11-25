@@ -504,6 +504,8 @@ input:checked + .slider:before {
   -webkit-overflow-scrolling: touch; }
   .tech-sources::-webkit-scrollbar {
     display: none; }
+  .tech-sources::-moz-scrollbar {
+    display: none; }
   .tech-sources::scrollbar {
     display: none; }
 
@@ -569,6 +571,10 @@ input:checked + .slider:before {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch; }
   .unsplash::-webkit-scrollbar {
+    display: none; }
+  .unsplash::-moz-scrollbar {
+    display: none; }
+  .unsplash::scrollbar {
     display: none; }
 
 .google-bar {
