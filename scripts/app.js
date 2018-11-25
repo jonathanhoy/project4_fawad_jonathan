@@ -269,7 +269,7 @@ app.getNewCategory = () => {
 
 // App init() method
 app.init = () => {
-  app.getPhotos();
+  // app.getPhotos();
   $('#hide-all').change(function () {
     if ($(this.checked)) {
       //Do stuff
