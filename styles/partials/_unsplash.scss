@@ -85,6 +85,12 @@
    z-index: 3000;
 }
 
+.background-btn{
+   @extend .close-btn;
+   right: 0;
+   left: auto;
+}
+
 .unsplash-credit{
 	position: absolute;
 	left: 47%;

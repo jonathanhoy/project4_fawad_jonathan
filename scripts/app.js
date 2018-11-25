@@ -1,6 +1,8 @@
+// app object
 const app = {};
-app.appName = 'UDash'
-// UNSPLASH
+app.appName = 'U-Dash'
+
+// UNSPLASH API
 app.unsplashClientID = '312de5ede65d57c255d22fc5a82552c05c3dc0fde821f66cfe2bef2ad716f8af';
 app.unsplashUrl = `https://api.unsplash.com/photos/random/?client_id=${app.unsplashClientID}`;
 app.getPhotos = (q) => {
@@ -20,13 +22,14 @@ app.getPhotos = (q) => {
 
 app.displayPhotoResults = (res) => {
   $('.unsplash-images').empty();
-  console.log(res);
   let results='';
   for(let i = 0; i < res.length; i++){
-    results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" 
-    data-url="${res[i].urls.full}" data-download-url="${res[i].links.download}" data-tracking="${res[i].links.download_location}"
-    data-creator-url="${res[i].user.links.html}" data-creator-name="${res[i].user.name}" 
-    data-creator-pic="${res[i].user.profile_image.large}" data-index="${i}">`;
+    if (res[i].description != null || res[i].description != ''){
+      results += `<img class="unsplash-image" src="${res[i].urls.small}" alt="${res[i].description}" 
+      data-url="${res[i].urls.full}" data-download-url="${res[i].links.download}" data-tracking="${res[i].links.download_location}"
+      data-creator-url="${res[i].user.links.html}" data-creator-name="${res[i].user.name}" 
+      data-creator-pic="${res[i].user.profile_image.large}" data-index="${i}">`;
+    }
   }
   $('.unsplash-images').append(results);
   app.unsplashModal();
@@ -49,6 +52,7 @@ app.downloadTrigger = (trackingLink) => {
 
 app.unsplashModal = () =>{
   let downloadURLTracking='';
+  let bgURL ='';
   $('.unsplash-image').on('click', function () {
     $('.image-info').empty();
     bgURL = $(this).attr('data-url');
@@ -75,6 +79,12 @@ app.unsplashModal = () =>{
 
   $('.close-btn').on('click', function () {
     $('.image-modal').css('display', 'none');
+  });
+
+  $('.background-btn').on('click', function () {
+    $('.grid-container').css('background', 
+      `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${bgURL}') center center`);
+    $('.grid-container').css('background-size', 'cover');
   });
 
   $('.download').on('click', function () {
@@ -195,61 +205,37 @@ app.currentDate = () => {
 }
 
 
-
-// NEWS API
+// Tech News API pulling data from various sources
 app.newsApiKey = 'b66771502bb047dbb8d6dd42c9d0b1b1';
-
-app.getNews = $.ajax({
-  url: `https://newsapi.org/v2/top-headlines`,
-  dataType: 'JSON',
-  method: 'GET',
-  data: {
-    apiKey: app.newsApiKey,
-    country: 'ca',
-    pageSize: 5
-  }
-});
-
-app.getHackerNews = $.ajax({
-  url: `https://newsapi.org/v2/top-headlines`,
-  dataType: 'JSON',
-  method: 'GET',
-  data: {
-    apiKey: app.newsApiKey,
-    sources: 'hacker-news',
-    pageSize: 5
-  }
-});
-
-$.when(app.getNews, app.getHackerNews)
-  .then((res1, res2) => {
-    // app.displayNewsResults(res1); // NEWS CURRENTLY DISABLED.
-    // app.displayNewsResults(res2); // NEWS CURRENTLY DISABLED.
-  })
-  .fail((err1, err2) => {
-    console.log(err1, err2);
+app.getTechNews = (source) => {
+  $.ajax({
+    url: `https://newsapi.org/v2/top-headlines`,
+    dataType: 'JSON',
+    method: 'GET',
+    data: {
+      apiKey: app.newsApiKey,
+      sources: source
+    }
+  }).then((res) => {
+    console.log(res);
+    app.displayNewsResults(res);
   });
-
-
-
-app.displayNewsResults = (res) => {
-  const articles = res[0].articles
-  articles.forEach((article) => {
-    $(`#news`).append(`
-      <div class="article">
-        <h3>${article.title}</h3>
-        <a href="${article.url}" target="_blank">${article.source.name}</a>
-      </div>
-    `);
-  })
 }
 
 
+app.displayNewsResults = (res) => {
+  $('.news-list').empty();
+  for(let i = 0; i < res.articles.length; i++){
+    $('.news-list').append(`
+      <div class="news-container animated fadeIn">
+      <p class="news-title"><a href="${res.articles[i].url}" target="_blank" class="news-link">${res.articles[i].title}</a></p>
+      </div>
+    `);
+  }
+}
 
 // NEW YORK TIMES
-
 app.nytApiKey = `api-key=b6adbb67b7d9458997ba0b2b5bed2846`;
-
 app.getNyt = (category) => {
   $.ajax({
     url: `https://api.nytimes.com/svc/topstories/v2/${category}.json?${app.nytApiKey}`,
@@ -281,10 +267,23 @@ app.getNewCategory = () => {
   })
 }
 
-
-
-
+// App init() method
 app.init = () => {
+  app.getPhotos();
+  $('#hide-all').change(function () {
+    if ($(this.checked)) {
+      //Do stuff
+      $('.tech-news').toggleClass('hide'); 
+      $('.unsplash').toggleClass('hide');
+      $('.news-tile').toggleClass('hide');
+    }
+  });
+  // random wallapaper for the Grid Container
+  const randomWallpaper = ['wallpaper-1', 'wallpaper-2', 'wallpaper-3'];
+  const randomPic = randomWallpaper[Math.floor(Math.random() * randomWallpaper.length)];
+  $('.grid-container').css('background',
+    `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/${randomPic}.jpg') center center`);
+  $('.grid-container').css('background-size','cover');
   // app.getPhotos();
   $('.unsplash-search').on('change',function (e) {
     e.preventDefault();
@@ -305,6 +304,13 @@ app.init = () => {
   app.currentTime(); // Date & Time tile
   app.getNyt('world'); // New York Times
   app.getNewCategory(); // Updates NYT section
+  app.getTechNews('wired'); //Gets Tech News by default Wired
+  $('.btn-source').on('click', function(e){
+    e.preventDefault();
+    $('.tech-head').text($(this).text());
+    const chosenSource = $(this).val();
+    app.getTechNews(chosenSource);
+  })
 }
 
 $(() => {
