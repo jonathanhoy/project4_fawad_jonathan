@@ -649,9 +649,9 @@ input:checked + .slider:before {
   .tech-news {
     grid-row: 4/7; }
   .unsplash {
-    grid-row: 4 / 5; }
+    grid-row: 7/8; }
   .news-tile {
-    grid-row: 5 / 6; }
+    grid-row: 8/10; }
   .unsplash-credit {
     left: 4rem;
     bottom: 0; }
