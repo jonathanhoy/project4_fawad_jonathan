@@ -21,8 +21,9 @@
 
 .weather-container {
   display: grid;
-  grid-template-columns: 1fr 0.6fr 0.6fr;
+  grid-template-columns: 0.6fr 0.6fr 0.6fr;
   grid-template-rows: auto;
+  grid-column-gap: 10px;
 }
 
 .weather-current {
@@ -46,10 +47,6 @@
   grid-column: 3 / 4;
   margin: 0;
   text-align: right;
-}
-
-.weather-high span, .weather-low span {
-  text-align: left;
 }
 
 .weather-high {

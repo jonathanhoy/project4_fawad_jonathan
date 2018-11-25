@@ -101,7 +101,7 @@ app.callCurrWeather = (city) => {
       city: city
     }
   }).then((res) => {
-    console.log(res);
+    // console.log(res);
     app.displayCurrWeather(res);
   })
 }
@@ -168,7 +168,7 @@ app.currentTime = () => {
     } else if (hours === 0) {
       hours = hours + 12;
     }
-    let minutes = `${today.getMinutes()}`;
+    let minutes = today.getMinutes();
     minutes = app.checkTime(minutes);
     let currentTime = `${hours}:${minutes}`;
     $('.time-container').empty();
