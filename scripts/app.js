@@ -276,6 +276,9 @@ app.init = () => {
       $('.tech-news').toggleClass('hide'); 
       $('.unsplash').toggleClass('hide');
       $('.news-tile').toggleClass('hide');
+      $('.google-bar').toggleClass('hide-mode-google');
+      $('.date-time').toggleClass('hide-mode-date-time');
+      $('.weather').toggleClass('hide-mode-weather');
     }
   });
   // random wallapaper for the Grid Container
@@ -297,8 +300,8 @@ app.init = () => {
     $('.image-info').css('display', 'none');
   });
 
-  app.callCurrWeather('Toronto, Canada'); // Weatherbit
-  app.callForecast('Toronto, Canada'); // Weatherbit
+  // app.callCurrWeather('Toronto, Canada'); // Weatherbit
+  // app.callForecast('Toronto, Canada'); // Weatherbit
   app.getNewCity(); // Weatherbit
   app.currentDate(); // Date & Time tile
   app.currentTime(); // Date & Time tile

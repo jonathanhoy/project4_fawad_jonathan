@@ -17,13 +17,20 @@
   <main>
     <div class="wrapper">
       <div class="grid-container">
-        <div class="grid-item date-time">
-          <div class="date-container"></div>
-          <div class="time-container"></div>
+        <div class="grid-item google-bar">
+          <form method="get" action="https://www.google.com/search" target="_blank" name="google-form" class="google-form">
+            <label for="search" class="visually-hidden">Google Search Bar</label>
+            <input type="text" id="search" class="search-bar" name="q" value="" placeholder="Google Search" autocomplete="off">
+            <input type="submit" class="search-submit">
+          </form>
           <label class="switch" for="hide-all">
             <input type="checkbox" id="hide-all">
             <span class="slider round"></span>
           </label>
+        </div>
+        <div class="grid-item date-time">
+          <div class="date-container"></div>
+          <div class="time-container"></div>
         </div>
         <div class="grid-item weather">
           <div class="weather-container"></div>
@@ -72,22 +79,6 @@
     <i class="fas fa-times fa-btn close-btn"></i><span class="visually-hidden">Close Image</span>
     <i class="fas fa-bold fa-btn background-btn"></i><span class="visually-hidden">Apply the image as background</span>
     <div class="image-info"></div>
-  </div>
-
-  <!-- <form method="get" action="https://www.google.com/search" target="_blank">
-    <input type="text" name="q" size="31" value="">
-    <input type="submit">
-  </form> -->
-
-  <div style="display: none;">
-    <h1>Hello, World!</h1>
-
-    <div id="weather">
-      <h2>Weather</h2>
-    </div>
-    <div id="news"></div>
-    <div id="photo"></div>
-
   </div>
 
   <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
