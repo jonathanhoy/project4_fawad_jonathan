@@ -52,6 +52,7 @@ app.downloadTrigger = (trackingLink) => {
 
 app.unsplashModal = () =>{
   let downloadURLTracking='';
+  let bgURL ='';
   $('.unsplash-image').on('click', function () {
     $('.image-info').empty();
     bgURL = $(this).attr('data-url');
@@ -78,6 +79,12 @@ app.unsplashModal = () =>{
 
   $('.close-btn').on('click', function () {
     $('.image-modal').css('display', 'none');
+  });
+
+  $('.background-btn').on('click', function () {
+    $('.grid-container').css('background', 
+      `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${bgURL}') center center`);
+    $('.grid-container').css('background-size', 'cover');
   });
 
   $('.download').on('click', function () {
@@ -242,6 +249,14 @@ app.getNewCategory = () => {
 // App init() method
 app.init = () => {
   app.getPhotos();
+  $('#hide-all').change(function () {
+    if ($(this.checked)) {
+      //Do stuff
+      $('.tech-news').toggleClass('hide'); 
+      $('.unsplash').toggleClass('hide');
+      $('.news-tile').toggleClass('hide');
+    }
+  });
   // random wallapaper for the Grid Container
   const randomWallpaper = ['wallpaper-1', 'wallpaper-2', 'wallpaper-3'];
   const randomPic = randomWallpaper[Math.floor(Math.random() * randomWallpaper.length)];
