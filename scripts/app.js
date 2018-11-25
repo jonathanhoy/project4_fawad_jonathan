@@ -64,7 +64,7 @@ app.unsplashModal = () =>{
     const createrImage = $(this).attr('data-creator-pic');
     const attributionPhotoBy = `${creatorURL}?utm_source=${app.appName}&utm_medium=referral`;
     const atrributionUnsplash = `https://unsplash.com/?utm_source=y${app.appName}&utm_medium=referral`;
-    const downloadButton = `<a href="${downloadURL}?force=download"><button class="download"><i class="fas fa-download fa-btn"></i><span class="visually-hidden">Download Button</span></button></a>`;
+    const downloadButton = `<a href="${downloadURL}?force=download" class="download-btn"><button class="download"><i class="fas fa-download fa-btn"></i><span class="visually-hidden">Download Button</span></button></a>`;
     const photoBy = `
     <a class="creator" target="blank" href="${attributionPhotoBy}"><div class="display-pic"></div> ${createrName}</a>`;
     const unsplashCredit = `<a class="unsplash-credit" target="blank" href=${atrributionUnsplash}>Unsplash</a>`;
@@ -82,9 +82,9 @@ app.unsplashModal = () =>{
   });
 
   $('.background-btn').on('click', function () {
-    $('.grid-container').css('background', 
+    $('.dashboard-main').css('background', 
       `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${bgURL}') center center`);
-    $('.grid-container').css('background-size', 'cover');
+    $('.dashboard-main').css('background-size', 'cover');
   });
 
   $('.download').on('click', function () {
@@ -111,7 +111,7 @@ app.callCurrWeather = (city) => {
       city: city
     }
   }).then((res) => {
-    // console.log(res);
+    console.log(res);
     app.displayCurrWeather(res);
   })
 }
@@ -122,10 +122,11 @@ app.displayCurrWeather = (res) => {
   const city = res.data[0].city_name;
   const country = res.data[0].country_code;
   const icon = res.data[0].weather.icon;
+  const description = res.data[0].weather.description;
   $('.city-input').attr('placeholder', `${city}, ${country}`);
   $('.weather-container').append(`
     <p class="weather-current">${currentWeather}${app.degrees}</p>
-    <img src="../assets/${icon}.png" class="weather-icon">
+    <img src="assets/${icon}.png" alt="${description}" class="weather-icon">
   `);
 }
 
@@ -139,7 +140,6 @@ app.callForecast = (city) => {
       city: city
     }
   }).then((res) => {
-    // console.log(res)
     app.displayForecast(res);
   })
 }
@@ -252,7 +252,7 @@ app.displayNytArticles = (res) => {
     if (res.results[i].multimedia.length != 0) {
       $('.news').append(`
         <div class="news-container animated fadeIn">
-          <a href="${res.results[i].url}" target="_blank"><img src="${res.results[i].multimedia[0].url}" class="news-image"></a>
+          <a href="${res.results[i].url}" target="_blank"><img src="${res.results[i].multimedia[0].url}" alt="${res.results[i].multimedia[0].caption}" class="news-image"></a>
           <p class="news-title"><a href="${res.results[i].url}" target="_blank" class="news-link">${res.results[i].title}</a></p>
         </div>
       `);
@@ -273,6 +273,7 @@ app.init = () => {
   $('#hide-all').change(function () {
     if ($(this.checked)) {
       //Do stuff
+      // $('.grid-container').css('height','100vh');
       $('.tech-news').toggleClass('hide'); 
       $('.unsplash').toggleClass('hide');
       $('.news-tile').toggleClass('hide');
@@ -284,9 +285,9 @@ app.init = () => {
   // random wallapaper for the Grid Container
   const randomWallpaper = ['wallpaper-1', 'wallpaper-2', 'wallpaper-3'];
   const randomPic = randomWallpaper[Math.floor(Math.random() * randomWallpaper.length)];
-  $('.grid-container').css('background',
+  $('.dashboard-main').css('background',
     `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/${randomPic}.jpg') center center`);
-  $('.grid-container').css('background-size','cover');
+  $('.dashboard-main').css('background-size','cover');
   // app.getPhotos();
   $('.unsplash-search').on('change',function (e) {
     e.preventDefault();

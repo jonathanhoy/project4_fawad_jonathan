@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <main>
+  <main class="dashboard-main">
     <div class="wrapper">
       <div class="grid-container">
         <div class="grid-item google-bar">
@@ -50,7 +50,8 @@
           <div class="news-list"></div>
         </div>
         <div class="grid-item unsplash">
-          <input class="unsplash-search" type="text" placeholder="Search">
+          <label for="unsplash-query" class="visually-hidden">Search Unsplash images</label>
+          <input id="unsplash-query" class="unsplash-search" type="text" placeholder="Search">
           <div class="unsplash-images"></div>
         </div>
         <div class="grid-item news-tile">

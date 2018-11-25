@@ -12,6 +12,9 @@
    &::-webkit-scrollbar {
     display: none;
   }
+  &::scrollbar {
+    display: none;
+  }
 }
 
 .btn-source{
@@ -21,5 +24,6 @@
    margin-right: .5rem;
    padding: 1rem 2rem;
    border-radius: 5px;
+   background: #f0f0f0;
 }
 
