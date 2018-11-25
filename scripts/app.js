@@ -125,7 +125,7 @@ app.displayCurrWeather = (res) => {
   $('.city-input').attr('placeholder', `${city}, ${country}`);
   $('.weather-container').append(`
     <p class="weather-current">${currentWeather}${app.degrees}</p>
-    <img src="../assets/${icon}.png" class="weather-icon">
+    <img src="assets/${icon}.png" class="weather-icon">
   `);
 }
 

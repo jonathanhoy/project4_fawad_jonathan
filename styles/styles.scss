@@ -184,4 +184,13 @@
    .background-btn, .download-btn{
       display: none;
    }
+
+   .news-form {
+      flex-direction: column;
+   }
+
+   .news-category{
+      margin-top: 1rem;
+      width: 100%;
+   }
 }
