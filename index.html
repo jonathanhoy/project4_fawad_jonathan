@@ -25,7 +25,13 @@
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="grid-item weather"></div>
+        <div class="grid-item weather">
+          <div class="weather-container"></div>
+          <form action="" class="weather-form">
+            <input type="text" class="city-input" id="city-input">
+            <label for="city-input" class="visually-hidden"></label>
+          </form>
+        </div>
         <div class="grid-item tech-news">
           <div class="tech-sources">
             <button class="btn-source" value="wired">Wired</button>
@@ -43,6 +49,7 @@
         <div class="grid-item news-tile">
           <form action="" class="news-form">
             <h2 class="headlines">Top Stories</h2>
+            <label for="news-category" class="visually-hidden">Select news category</label>
             <select name="category" id="news-category" class="news-category">
               <option value="world" selected>World</option>
               <option value="science">Science</option>
