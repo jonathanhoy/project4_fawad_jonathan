@@ -11,10 +11,13 @@
    -webkit-overflow-scrolling: touch;
    &::-webkit-scrollbar {
     display: none;
-  }
-  &::scrollbar {
+   }
+   &::-moz-scrollbar {
     display: none;
-  }
+   }
+   &::scrollbar {
+      display: none;
+   }
 }
 
 .btn-source{
