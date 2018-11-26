@@ -1,10 +1,11 @@
 // app object
 const app = {};
-app.appName = 'U-Dash'
 
-// UNSPLASH API
+//****************************UNSPLASH API****************************
+app.appName = 'U-Dash'
 app.unsplashClientID = '312de5ede65d57c255d22fc5a82552c05c3dc0fde821f66cfe2bef2ad716f8af';
 app.unsplashUrl = `https://api.unsplash.com/photos/random/?client_id=${app.unsplashClientID}`;
+// Get Random Photos with maximum count 14
 app.getPhotos = (q) => {
   $.ajax({
     url: app.unsplashUrl,
@@ -20,6 +21,7 @@ app.getPhotos = (q) => {
   });
 }
 
+// Display the photos by generating img tags for the no of images pulled by the API
 app.displayPhotoResults = (res) => {
   $('.unsplash-images').empty();
   let results='';
@@ -50,9 +52,11 @@ app.downloadTrigger = (trackingLink) => {
   }
 }
 
+// All functions related to the image modal which pops when an unsplash image is clicked
 app.unsplashModal = () =>{
   let downloadURLTracking='';
   let bgURL ='';
+  // When image clicked, pull the info as per the API docs and open in modal displaying the credits info
   $('.unsplash-image').on('click', function () {
     $('.image-info').empty();
     bgURL = $(this).attr('data-url');
@@ -76,31 +80,29 @@ app.unsplashModal = () =>{
     $('.image-info').append(photoBy, unsplashCredit, downloadButton);
     $('.display-pic').css({ 'border-radius': '50%', 'background': 'url(' + createrImage + ')', 'background-size': 'cover', 'background-position': 'center', 'width': '50px', 'height': '50px', 'border': '2px solid #808080', 'margin': '0.5rem' });  
   });
-
+  // Closes the modal 
   $('.close-btn').on('click', function () {
     $('.image-modal').css('display', 'none');
   });
-
+  // Applies the opened image in modal as wallpaper for the dashboard
   $('.background-btn').on('click', function () {
     $('.dashboard-main').css('background', 
       `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${bgURL}') center center`);
     $('.dashboard-main').css('background-size', 'cover');
   });
-
+  // downloads the image to the computer when clicked
   $('.download').on('click', function () {
-    console.log(downloadURLTracking);
     app.downloadTrigger(downloadURLTracking);
   });
-
 }
+//****************************UNSPLASH API****************************
 
-
-// WEATHER BIT API
-
+//****************************WEATHER BIT API*************************
 app.weatherBitApiKey = '31c8603c22634ebeab1e5b95384a3b2d';
 app.getCurrWeatherUrl = ' http://api.weatherbit.io/v2.0/current';
 app.getForecastWeatherUrl = ' http://api.weatherbit.io/v2.0/forecast/daily';
 
+// Gets the current weather by passing the city
 app.callCurrWeather = (city) => {
   $.ajax({
     url: app.getCurrWeatherUrl,
@@ -111,11 +113,11 @@ app.callCurrWeather = (city) => {
       city: city
     }
   }).then((res) => {
-    console.log(res);
     app.displayCurrWeather(res);
   })
 }
 
+// Displays the weathers in Degrees Centigrade
 app.degrees = `&deg;C`
 app.displayCurrWeather = (res) => {
   const currentWeather = Math.floor(res.data[0].temp);
@@ -130,6 +132,7 @@ app.displayCurrWeather = (res) => {
   `);
 }
 
+// Forecasts the weather
 app.callForecast = (city) => {
   $.ajax({
     url: app.getForecastWeatherUrl,
@@ -144,6 +147,7 @@ app.callForecast = (city) => {
   })
 }
 
+//Displays the forecast 
 app.displayForecast = (res) => {
   const high = Math.floor(res.data[0].max_temp);
   const low = Math.floor(res.data[0].min_temp);
@@ -153,6 +157,7 @@ app.displayForecast = (res) => {
   `);
 }
 
+// Gets the weather for the new city input by the user
 app.getNewCity = () => {
   $('.weather-form').on('submit', (e) => {
     e.preventDefault();
@@ -162,9 +167,11 @@ app.getNewCity = () => {
     app.callForecast(newCity);
   })
 }
+//****************************WEATHER BIT API*************************
 
-// DATE AND TIME
+//****************************DATE AND TIME***************************
 // credit: https://tecadmin.net/get-current-date-time-javascript/
+// Current Time
 app.currentTime = () => {
   window.setInterval(function() {
     const today = new Date();
@@ -187,11 +194,13 @@ app.currentTime = () => {
 }
 
 // credit: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
+// Chech time to maintain 12hr format
 app.checkTime = (i) => {
   if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
   return i;
 }
 
+// Current Date
 app.currentDate = () => {
   const today = new Date();
   let year = `${today.getFullYear()}`;
@@ -203,10 +212,13 @@ app.currentDate = () => {
   $('.date-container').empty();
   $('.date-container').append(`<p class="date animated fadeIn">${currentDate}</p>`);
 }
+//****************************DATE AND TIME***************************
 
 
-// Tech News API pulling data from various sources
+//****************************TECH NEWS API***************************
+// Using News API to pull tech news from various sources. Simple a source is passed to the API to get results
 app.newsApiKey = 'b66771502bb047dbb8d6dd42c9d0b1b1';
+// Getting tech news by passing the source. E.g. The wired is default
 app.getTechNews = (source) => {
   $.ajax({
     url: `https://newsapi.org/v2/top-headlines`,
@@ -217,12 +229,10 @@ app.getTechNews = (source) => {
       sources: source
     }
   }).then((res) => {
-    console.log(res);
     app.displayNewsResults(res);
   });
 }
-
-
+// Display the News
 app.displayNewsResults = (res) => {
   $('.news-list').empty();
   for(let i = 0; i < res.articles.length; i++){
@@ -233,19 +243,20 @@ app.displayNewsResults = (res) => {
     `);
   }
 }
+//****************************TECH NEWS API***************************
 
-// NEW YORK TIMES
+//****************************NY Times API****************************
 app.nytApiKey = `api-key=b6adbb67b7d9458997ba0b2b5bed2846`;
+// Get top stories based on the category passed to the API. World top stories is default
 app.getNyt = (category) => {
   $.ajax({
     url: `https://api.nytimes.com/svc/topstories/v2/${category}.json?${app.nytApiKey}`,
     method: 'GET'
   }).then((res) => {
-    // console.log(res.results)
     app.displayNytArticles(res);
   });
 }
-
+// Display results
 app.displayNytArticles = (res) => {
   $('.news').empty();
   for (let i = 0; i < res.results.length; i++) {
@@ -259,21 +270,27 @@ app.displayNytArticles = (res) => {
     }
   }
 }
-
+// When new category is selected. Getting stories for the category selected
 app.getNewCategory = () => {
   $('.news-category').on('change', function() {
     const newCategory = $(this).val();
     app.getNyt(newCategory);
   })
 }
+//****************************NY Times API****************************
 
 // App init() method
 app.init = () => {
-  // app.getPhotos();
+  // Calling Unsplash API
+  app.getPhotos();
+  // images can be searched using unsplash
+  $('.unsplash-search').on('change', function (e) {
+    e.preventDefault();
+    app.getPhotos($('.unsplash-search').val());
+  });
+  // When toggle is used to hide all the info on the dashboard except date, time, weather and the google bar
   $('#hide-all').change(function () {
     if ($(this.checked)) {
-      //Do stuff
-      // $('.grid-container').css('height','100vh');
       $('.tech-news').toggleClass('hide'); 
       $('.unsplash').toggleClass('hide');
       $('.news-tile').toggleClass('hide');
@@ -288,12 +305,7 @@ app.init = () => {
   $('.dashboard-main').css('background',
     `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/${randomPic}.jpg') center center`);
   $('.dashboard-main').css('background-size','cover');
-  // app.getPhotos();
-  $('.unsplash-search').on('change',function (e) {
-    e.preventDefault();
-    console.log($('.unsplash-search').val());
-    app.getPhotos($('.unsplash-search').val());
-  });
+  
   // hover on image modal
   $('.image-modal').hover(function () {
     $('.image-info').css('display', 'block');
@@ -301,14 +313,24 @@ app.init = () => {
     $('.image-info').css('display', 'none');
   });
 
-  // app.callCurrWeather('Toronto, Canada'); // Weatherbit
-  // app.callForecast('Toronto, Canada'); // Weatherbit
-  app.getNewCity(); // Weatherbit
-  app.currentDate(); // Date & Time tile
-  app.currentTime(); // Date & Time tile
-  app.getNyt('world'); // New York Times
-  app.getNewCategory(); // Updates NYT section
-  app.getTechNews('wired'); //Gets Tech News by default Wired
+  // Calling the Weather Bit API
+  app.callCurrWeather('Toronto, Canada');
+  app.callForecast('Toronto, Canada');
+  // Weather for a different city can be checked
+  app.getNewCity();
+
+  // Date & Time
+  app.currentDate(); 
+  app.currentTime();
+
+  // New York Times
+  app.getNyt('world');
+  // Updates NYT section
+  app.getNewCategory(); 
+
+  //Gets Tech News by default Wired
+  app.getTechNews('wired');
+  // When News API source is changes
   $('.btn-source').on('click', function(e){
     e.preventDefault();
     $('.tech-head').text($(this).text());
@@ -317,7 +339,7 @@ app.init = () => {
   })
 }
 
-$(() => {
-  app.init();
-  
+// Document Ready
+$(function () {
+  app.init(); 
 })
