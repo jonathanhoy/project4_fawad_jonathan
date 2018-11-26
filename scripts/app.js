@@ -314,8 +314,9 @@ app.init = () => {
   });
 
   // Calling the Weather Bit API
-  // app.callCurrWeather('Toronto, Canada');
-  // app.callForecast('Toronto, Canada');
+  app.callCurrWeather('Toronto, Canada');
+  app.callForecast('Toronto, Canada');
+  // Weather for a different city can be checked
   app.getNewCity();
 
   // Date & Time
